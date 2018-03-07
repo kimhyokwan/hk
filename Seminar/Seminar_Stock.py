@@ -11,6 +11,9 @@ from matplotlib import font_manager, rc
 font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 
+import fix_yahoo_finance as yf
+yf.pdr_override()
+
 today = date.today()
 startday = date.today() - timedelta(720)
 yesterday = date.today() - timedelta(1)
@@ -19,7 +22,8 @@ yesterday = date.today() - timedelta(1)
 print(yesterday)
 #GoogleDailyReader??
 
-SEC = web.DataReader("005930.KS", "yahoo", startday, yesterday)
+# SEC = web.DataReader("005930.KS", "yahoo", startday, yesterday)
+SEC = web.get_data_yahoo("005930.KS", startday, yesterday)
 print(SEC)
 
 print(SEC.tail())
